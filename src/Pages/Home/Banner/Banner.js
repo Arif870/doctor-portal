@@ -36,10 +36,11 @@ export default function Banner() {
                   We Takecare of your Wealth, Which is Health.
                 </Typography>
                 <Typography
-                  varient="p"
+                  variant="p"
                   style={{
                     color: "var(--body-text-color)",
                     margin: "20px 0px",
+                    display: "block",
                   }}
                 >
                   This is most popular healthcare in this city. Ullam atque

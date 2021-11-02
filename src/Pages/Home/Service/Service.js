@@ -33,11 +33,18 @@ export default function Service(props) {
               <Typography variant="h5" component="div">
                 {name}
               </Typography>
-              <Typography sx={{ mb: 1.5, color: "var(--primary-color)" }}>
+              <Typography
+                variant="small"
+                sx={{ mb: 1.5, color: "var(--primary-color)" }}
+              >
                 {type}
-              </Typography>
-
-              <Typography style={{ color: "var(--body-text-color)" }}>
+              </Typography>{" "}
+              <br />
+              <br />
+              <Typography
+                variant="p"
+                style={{ color: "var(--body-text-color)" }}
+              >
                 {desc}
               </Typography>
             </CardContent>
@@ -47,7 +54,8 @@ export default function Service(props) {
                 style={{
                   color: "var(--secondary-color)",
                   fontSize: "20px",
-                  paddingBottom: "10px",
+                  paddingBottom: "20px",
+                  paddingTop: "20px",
                   display: "block",
                   cursor: "pointer",
                 }}
