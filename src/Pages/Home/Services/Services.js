@@ -2,39 +2,50 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import Service from "../Home/Service/Service";
+import Service from "../Service/Service";
 import healthcare from "../../../images/healthcare.png";
+import fluorid from "../../../images/flouride.png";
+import eyecare from "../../../images/eyecare.png";
+import brain from "../../../images/brain.png";
+import lungs from "../../../images/lungs.png";
+import kidney from "../../../images/kidney.png";
 
 const services = [
   {
-    name: "Teeth Specialist",
+    name: "Health Care",
     desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
     img: healthcare,
+    type: "care open services",
   },
   {
-    name: "Heath Specialist",
-    desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
-    img: "",
+    name: "Fluoride Treatment",
+    desc: "Fluoride Treatment consectetur adipisicing elit, nostrum we have speliest",
+    img: fluorid,
+    type: "care open services",
   },
   {
-    name: "Teeth Specialist",
-    desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
-    img: "",
+    name: "Eye Specialist",
+    desc: "Eye Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
+    img: eyecare,
+    type: "emergency",
   },
   {
-    name: "Teeth Specialist",
-    desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
-    img: "",
+    name: "Brain Specialist",
+    desc: "Brain Specialist  amet consectetur adipisicing elit. Consectetur, norowey",
+    img: brain,
+    type: "emergency",
   },
   {
-    name: "Teeth Specialist",
-    desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
-    img: "",
+    name: "Lung Treatment",
+    desc: " Lung Specialist  amet consectetur adipisicing elit. Consectetur UK",
+    img: lungs,
+    type: "emergency",
   },
   {
-    name: "Teeth Specialist",
-    desc: "Specialist  amet consectetur adipisicing elit. Consectetur, nostrum",
-    img: "",
+    name: "Kidney Transplant",
+    desc: "Kidney Transplant  amet consectetur adipisicing elit. Consectetur, Swiden",
+    img: kidney,
+    type: "emergency",
   },
 ];
 
@@ -42,7 +53,7 @@ export default function Services() {
   return (
     <div>
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{ textAlign: "center", fontWeight: "normal", marginY: "50px" }}
       >
         {" "}

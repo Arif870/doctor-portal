@@ -1,14 +1,12 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { CardMedia } from "@mui/material";
 
 export default function Service(props) {
-  const { name, desc, img } = props.service;
+  const { name, desc, img, type } = props.service;
   return (
     <div>
       <Box
@@ -25,7 +23,7 @@ export default function Service(props) {
                 width: "150px",
                 margin: "auto",
                 display: "block",
-                marginY: "10px",
+                marginTop: "10px",
               }}
               component="img"
               image={img}
@@ -35,14 +33,26 @@ export default function Service(props) {
               <Typography variant="h5" component="div">
                 {name}
               </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
+              <Typography sx={{ mb: 1.5, color: "var(--primary-color)" }}>
+                {type}
               </Typography>
-              <Typography variant="body2">{desc}</Typography>
+
+              <Typography style={{ color: "var(--body-text-color)" }}>
+                {desc}
+              </Typography>
             </CardContent>
-            <CardActions>
-              <Button size="small">Learn More</Button>
-            </CardActions>
+            <Box>
+              <i
+                className="fas fa-long-arrow-alt-right"
+                style={{
+                  color: "var(--secondary-color)",
+                  fontSize: "20px",
+                  paddingBottom: "10px",
+                  display: "block",
+                  cursor: "pointer",
+                }}
+              ></i>
+            </Box>
           </React.Fragment>
         </Card>
       </Box>
