@@ -26,7 +26,7 @@ export default function Blog() {
       <Box style={{ marginTop: "80px" }} sx={{ flexGrow: 1 }}>
         <Grid
           container
-          spacing={{ xs: 2, md: 3 }}
+          spacing={{ xs: 3, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           <Grid item xs={4} sm={4} md={4}>
@@ -35,6 +35,7 @@ export default function Blog() {
                 style={{
                   boxShadow: "rgb(78 78 78 / 40%) 0px 4px 9px",
                   borderRadius: "10px",
+                  width: "100%",
                 }}
                 src={blogimg}
                 alt="blog"
