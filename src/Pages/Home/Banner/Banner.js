@@ -6,6 +6,7 @@ import bannerimg from "../../../images/bannerimg.jpg";
 import { Container, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { Link } from "react-router-dom";
 
 export default function Banner() {
   return (
@@ -49,19 +50,21 @@ export default function Banner() {
                   perferendis incidunt nihil sint sunt ea.
                 </Typography>
                 <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="contained"
-                    style={{
-                      backgroundColor: "var(--secondary-color)",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Get Appointment{" "}
-                    <i
-                      className="fas fa-chevron-circle-right"
-                      style={{ marginLeft: "10px" }}
-                    ></i>
-                  </Button>
+                  <Link to="/appointment" style={{ textDecoration: "none" }}>
+                    <Button
+                      variant="contained"
+                      style={{
+                        backgroundColor: "var(--secondary-color)",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Get Appointment{" "}
+                      <i
+                        className="fas fa-chevron-circle-right"
+                        style={{ marginLeft: "10px" }}
+                      ></i>
+                    </Button>
+                  </Link>
                 </Stack>
               </div>
             </Grid>

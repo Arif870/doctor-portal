@@ -71,9 +71,9 @@ export default function Testimonial() {
           spacing={{ xs: 3, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {testimonial.map(comments => (
-            <Grid item xs={4} sm={4} md={4}>
-              <Testi key={comments.name} comments={comments} />
+          {testimonial.map((comments, index) => (
+            <Grid item xs={4} sm={4} md={4} key={index}>
+              <Testi comments={comments} />
             </Grid>
           ))}
         </Grid>

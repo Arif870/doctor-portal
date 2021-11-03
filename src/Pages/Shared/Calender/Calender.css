@@ -1,0 +1,17 @@
+.css-j7qwjs .css-epd502 {
+  margin: 0px;
+}
+.css-l0iinn {
+  color: var(--primary-color);
+}
+.css-i4bv87-MuiSvgIcon-root {
+  color: var(--primary-color);
+}
+button.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
+button.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover,
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: var(--primary-color) !important;
+}
+button.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
+  border: 1px solid var(--primary-color);
+}

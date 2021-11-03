@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../../../images/logo.png";
+import { Link } from "react-router-dom";
 
 export default function Navigation() {
   return (
@@ -31,7 +32,10 @@ export default function Navigation() {
               sx={{ flexGrow: 1, textAlign: "center" }}
             >
               <Box sx={{ marginY: "20px" }}>
-                <img src={logo} alt="logo" />
+                <Link to="/">
+                  {" "}
+                  <img src={logo} alt="logo" />
+                </Link>
               </Box>
             </Typography>
             <Button sx={{ color: "#333333", fontWeight: "normal" }}>

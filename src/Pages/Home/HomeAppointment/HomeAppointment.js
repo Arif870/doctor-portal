@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import appointmentbg from "../../../images/appointment.png";
 import "./HomeAppointment.css";
 export default function HomeAppointment() {
@@ -33,20 +34,22 @@ export default function HomeAppointment() {
             involve cutting, abrading, suturing, or otherwise physically
             changing body tissues and organs.
           </Typography>
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: "var(--secondary-color)",
-              fontWeight: "bold",
-              marginTop: "40px",
-            }}
-          >
-            Make an appointment{" "}
-            <i
-              className="fas fa-chevron-circle-right"
-              style={{ marginLeft: "10px" }}
-            ></i>
-          </Button>
+          <Link to="/appointment" style={{ textDecoration: "none" }}>
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "var(--secondary-color)",
+                fontWeight: "bold",
+                marginTop: "40px",
+              }}
+            >
+              Make an appointment{" "}
+              <i
+                className="fas fa-chevron-circle-right"
+                style={{ marginLeft: "10px" }}
+              ></i>
+            </Button>
+          </Link>
         </Grid>
         <Grid item xs={12} md={5}>
           <img style={{ width: "100%" }} src={appointmentbg} alt="" />
