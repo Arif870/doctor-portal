@@ -1,0 +1,12 @@
+@media screen and (min-width: 200px) and (max-width: 460px) {
+  .css-1wnsr1i {
+    width: 280px !important;
+    padding: 15px !important;
+  }
+}
+@media screen and (min-width: 678px) {
+  .css-1wnsr1i {
+    width: 400px !important;
+    padding: 20px !important;
+  }
+}

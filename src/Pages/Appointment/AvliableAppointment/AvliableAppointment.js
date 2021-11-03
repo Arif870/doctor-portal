@@ -61,7 +61,7 @@ export default function AvliableAppointment({ date }) {
         >
           {bookings.map((booking, index) => (
             <Grid item xs={4} sm={4} md={4} key={index}>
-              <Booking booking={booking} />
+              <Booking date={date} booking={booking} />
             </Grid>
           ))}
         </Grid>
