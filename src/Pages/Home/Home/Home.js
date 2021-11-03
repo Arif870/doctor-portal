@@ -1,6 +1,7 @@
 import React from "react";
 import Ataglance from "../Ataglance/Ataglance";
 import Banner from "../Banner/Banner";
+import Blog from "../Blog/Blog";
 import HomeAppointment from "../HomeAppointment/HomeAppointment";
 import Services from "../Services/Services";
 import Surgery from "../Surgery/Surgery";
@@ -15,6 +16,7 @@ export default function Home() {
       <Surgery />
       <HomeAppointment />
       <Testimonial />
+      <Blog />
     </div>
   );
 }
