@@ -8,7 +8,6 @@ export default function HomeAppointment() {
       <Grid
         container
         style={{
-          //   direction: "row-reverce",
           display: "flex",
           alignItems: "center",
           marginTop: "100px",
