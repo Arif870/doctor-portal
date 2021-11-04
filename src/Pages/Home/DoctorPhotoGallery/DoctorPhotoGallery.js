@@ -2,9 +2,6 @@ import React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 import { Typography } from "@mui/material";
 
 const itemData = [
@@ -23,14 +20,13 @@ const itemData = [
   },
   {
     img: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Camera",
-    author: "@helloimnik",
+    title: "Jin maton",
+    author: "@maton33",
   },
   {
     img: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
-    title: "Coffee",
-    author: "@nolanissac",
-    cols: 2,
+    title: "Jue Baiden",
+    author: "@baiden",
   },
 ];
 
@@ -52,7 +48,7 @@ export default function DoctorPhotoGallery() {
       </Typography>
       <Typography
         variant="h4"
-        style={{ textAlign: "center", marginBottom: "80px" }}
+        style={{ textAlign: "center", marginBottom: "50px" }}
       >
         Doctor's Photo Gallery
       </Typography>
@@ -60,7 +56,12 @@ export default function DoctorPhotoGallery() {
         <ImageListItem key="Subheader" cols={2}></ImageListItem>
         {itemData.map(item => (
           <ImageListItem key={item.img}>
-            <img src={`${item.img}`} alt={item.title} />
+            <img
+              src={`${item.img}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
             <ImageListItemBar title={item.title} subtitle={item.author} />
           </ImageListItem>
         ))}

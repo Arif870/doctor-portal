@@ -8,7 +8,7 @@ import people3 from "../../../images/people-3.png";
 
 export default function Blog() {
   return (
-    <div style={{ margin: "100px 0px", textAlign: "center" }}>
+    <div style={{ margin: "70px 0px", textAlign: "center" }}>
       <Typography
         variant="p"
         style={{
@@ -23,7 +23,7 @@ export default function Blog() {
       </Typography>
       <Typography variant="h4">Latest Blog News</Typography>
 
-      <Box style={{ marginTop: "80px" }} sx={{ flexGrow: 1 }}>
+      <Box style={{ marginTop: "70px" }} sx={{ flexGrow: 1 }}>
         <Grid
           container
           spacing={{ xs: 3, md: 3 }}
