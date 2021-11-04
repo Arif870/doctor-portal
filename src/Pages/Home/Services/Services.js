@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import Service from "../Service/Service";
 import healthcare from "../../../images/healthcare.png";
 import fluorid from "../../../images/flouride.png";
@@ -52,26 +52,28 @@ const services = [
 export default function Services() {
   return (
     <div>
-      <Typography
-        variant="h4"
-        sx={{ textAlign: "center", fontWeight: "normal", marginY: "50px" }}
-      >
-        {" "}
-        Our Services
-      </Typography>
-      <Box sx={{ flexGrow: 1, textAlign: "center", borderRadius: "10px" }}>
-        <Grid
-          container
-          spacing={{ xs: 3, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+      <Container>
+        <Typography
+          variant="h4"
+          sx={{ textAlign: "center", fontWeight: "normal", marginY: "50px" }}
         >
-          {services.map((service, index) => (
-            <Grid item xs={4} sm={4} md={4} key={index}>
-              <Service service={service} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+          {" "}
+          Our Services
+        </Typography>
+        <Box sx={{ flexGrow: 1, textAlign: "center", borderRadius: "10px" }}>
+          <Grid
+            container
+            spacing={{ xs: 3, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            {services.map((service, index) => (
+              <Grid item xs={4} sm={4} md={4} key={index}>
+                <Service service={service} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
     </div>
   );
 }

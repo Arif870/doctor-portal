@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -46,26 +46,28 @@ const bookings = [
 export default function AvliableAppointment({ date }) {
   return (
     <div>
-      <Typography
-        style={{ textAlign: "center", marginTop: "10px" }}
-        variant="h4"
-      >
-        Avliable Appointment {date.toDateString()}
-      </Typography>
-
-      <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+      <Container>
+        <Typography
+          style={{ textAlign: "center", marginTop: "10px" }}
+          variant="h4"
         >
-          {bookings.map((booking, index) => (
-            <Grid item xs={4} sm={4} md={4} key={index}>
-              <Booking date={date} booking={booking} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+          Avliable Appointment {date.toDateString()}
+        </Typography>
+
+        <Box sx={{ flexGrow: 1, marginTop: "50px" }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+          >
+            {bookings.map((booking, index) => (
+              <Grid item xs={4} sm={4} md={4} key={index}>
+                <Booking date={date} booking={booking} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
     </div>
   );
 }

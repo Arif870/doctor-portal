@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import TextField from "@mui/material/TextField";
-import { Button, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import "./BookingModel.css";
 
 const style = {
@@ -33,98 +33,100 @@ export default function BookingModal({
   const { name, time } = booking;
   return (
     <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <form>
-              <Typography
-                style={{
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  marginBottom: "20px",
-                  color: "var(--primary-color)",
-                  display: "block",
-                }}
-                variant="p"
-              >
-                {name}
-              </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > :not(style)": { m: 1 },
-                }}
-              >
-                <TextField style={{ width: "100%" }} value={time} disabled />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > :not(style)": { m: 1 },
-                }}
-              >
-                <TextField style={{ width: "100%" }} label="Name" />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > :not(style)": { m: 1 },
-                }}
-              >
-                <TextField style={{ width: "100%" }} label="Phone Number" />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > :not(style)": { m: 1 },
-                }}
-              >
-                <TextField style={{ width: "100%" }} label="Email" />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  "& > :not(style)": { m: 1 },
-                }}
-              >
-                <TextField
-                  disabled
-                  style={{ width: "100%" }}
-                  value={date.toDateString()}
-                />
-              </Box>
+      <Container>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <form>
+                <Typography
+                  style={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: "20px",
+                    color: "var(--primary-color)",
+                    display: "block",
+                  }}
+                  variant="p"
+                >
+                  {name}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "& > :not(style)": { m: 1 },
+                  }}
+                >
+                  <TextField style={{ width: "100%" }} value={time} disabled />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "& > :not(style)": { m: 1 },
+                  }}
+                >
+                  <TextField style={{ width: "100%" }} label="Name" />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "& > :not(style)": { m: 1 },
+                  }}
+                >
+                  <TextField style={{ width: "100%" }} label="Phone Number" />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "& > :not(style)": { m: 1 },
+                  }}
+                >
+                  <TextField style={{ width: "100%" }} label="Email" />
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    "& > :not(style)": { m: 1 },
+                  }}
+                >
+                  <TextField
+                    disabled
+                    style={{ width: "100%" }}
+                    value={date.toDateString()}
+                  />
+                </Box>
 
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                style={{
-                  backgroundColor: "var(--secondary-color)",
-                  fontWeight: "bold",
-                  float: "right",
-                  margin: "12px",
-                }}
-              >
-                Book{" "}
-              </Button>
-            </form>
-          </Box>
-        </Fade>
-      </Modal>
+                <Button
+                  onClick={handleClose}
+                  variant="contained"
+                  style={{
+                    backgroundColor: "var(--secondary-color)",
+                    fontWeight: "bold",
+                    float: "right",
+                    margin: "12px",
+                  }}
+                >
+                  Book{" "}
+                </Button>
+              </form>
+            </Box>
+          </Fade>
+        </Modal>
+      </Container>
     </div>
   );
 }

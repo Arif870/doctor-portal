@@ -2,7 +2,7 @@ import React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const itemData = [
   {
@@ -33,39 +33,41 @@ const itemData = [
 export default function DoctorPhotoGallery() {
   return (
     <div>
-      <Typography
-        variant="p"
-        style={{
-          color: "var(--primary-color)",
-          fontWeight: "bold",
-          textTransform: "uppercase",
-          marginBottom: "20px",
-          textAlign: "center",
-          display: "block",
-        }}
-      >
-        Respected Doctor's
-      </Typography>
-      <Typography
-        variant="h4"
-        style={{ textAlign: "center", marginBottom: "50px" }}
-      >
-        Doctor's Photo Gallery
-      </Typography>
-      <ImageList sx={{ width: "100%", height: 450 }}>
-        <ImageListItem key="Subheader" cols={2}></ImageListItem>
-        {itemData.map(item => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar title={item.title} subtitle={item.author} />
-          </ImageListItem>
-        ))}
-      </ImageList>
+      <Container>
+        <Typography
+          variant="p"
+          style={{
+            color: "var(--primary-color)",
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            marginBottom: "20px",
+            textAlign: "center",
+            display: "block",
+          }}
+        >
+          Respected Doctor's
+        </Typography>
+        <Typography
+          variant="h4"
+          style={{ textAlign: "center", marginBottom: "50px" }}
+        >
+          Doctor's Photo Gallery
+        </Typography>
+        <ImageList sx={{ width: "100%", height: 450 }}>
+          <ImageListItem key="Subheader" cols={2}></ImageListItem>
+          {itemData.map(item => (
+            <ImageListItem key={item.img}>
+              <img
+                src={`${item.img}?w=248&fit=crop&auto=format`}
+                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                alt={item.title}
+                loading="lazy"
+              />
+              <ImageListItemBar title={item.title} subtitle={item.author} />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      </Container>
     </div>
   );
 }
