@@ -1,11 +1,27 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
 import "./Login.css";
 
 export default function Login() {
+  const [logInData, setLoginData] = useState({});
+
+  const handleLoginSubmit = e => {
+    e.preventDefault();
+  };
+
+  const changeHandalar = e => {
+    const value = e.target.value;
+    const field = e.target.name;
+
+    const newLoginData = { ...logInData };
+    newLoginData[field] = value;
+    setLoginData(newLoginData);
+  };
+  console.log(logInData);
+
   return (
     <div
       style={{
@@ -37,20 +53,28 @@ export default function Login() {
           >
             Please Login
           </Typography>
-          <form className="loginformsizecontrol" style={{ width: "500px" }}>
+          <form
+            onSubmit={handleLoginSubmit}
+            className="loginformsizecontrol"
+            style={{ width: "500px" }}
+          >
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
               id="filled-basic"
               label="Email"
               type="email"
+              name="email"
               variant="filled"
+              onChange={changeHandalar}
             />
             <TextField
               style={{ width: "100%" }}
               id="filled-basic"
               label="Password"
               type="password"
+              name="password"
               variant="filled"
+              onChange={changeHandalar}
             />
             <Typography
               variant="p"
@@ -69,12 +93,13 @@ export default function Login() {
                   }}
                   to="/registration"
                 >
-                  Registration first
+                  Please Registration
                 </Link>
               }
             </Typography>
             <Button
               variant="contained"
+              type="submit"
               style={{
                 backgroundColor: "var(--secondary-color)",
                 fontWeight: "bold",
