@@ -1,15 +1,33 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
+import Swal from "sweetalert2";
 import "./Login.css";
 
 export default function Login() {
+  const { userLogin, error } = useAuth();
   const [logInData, setLoginData] = useState({});
 
   const handleLoginSubmit = e => {
     e.preventDefault();
+    const emailLength = document.getElementById("login_email").value.length;
+    const passLength = document.getElementById("login_pass").value.length;
+    if (emailLength === 0 || passLength === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Field must not be empty",
+      });
+    } else if (error) {
+      Swal.fire({
+        icon: "error",
+        title: error,
+      });
+    } else {
+      userLogin(logInData.email, logInData.password);
+    }
   };
 
   const changeHandalar = e => {
@@ -20,7 +38,6 @@ export default function Login() {
     newLoginData[field] = value;
     setLoginData(newLoginData);
   };
-  console.log(logInData);
 
   return (
     <div
@@ -60,7 +77,7 @@ export default function Login() {
           >
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
-              id="filled-basic"
+              id="login_email"
               label="Email"
               type="email"
               name="email"
@@ -69,7 +86,7 @@ export default function Login() {
             />
             <TextField
               style={{ width: "100%" }}
-              id="filled-basic"
+              id="login_pass"
               label="Password"
               type="password"
               name="password"

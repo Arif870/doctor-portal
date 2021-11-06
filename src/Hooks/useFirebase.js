@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import {
   getAuth,
   onAuthStateChanged,
@@ -6,10 +7,15 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import FirebaseInit from "../Firebase/FirebaseInit";
+
+FirebaseInit();
 
 export default function useFirebase() {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   const auth = getAuth();
 
   // Obserber
@@ -21,49 +27,71 @@ export default function useFirebase() {
       } else {
         setUser({});
       }
+      setIsLoading(false);
     });
   }, []);
 
   // Register user
 
   const registerUser = (email, password) => {
+    setIsLoading(false);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         // Signed in
-        setUser(userCredential.user);
-        // ...
+        const user = userCredential.user;
+        setUser(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Registration successfull",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       })
       .catch(error => {
-        setError(error.message);
-        // ..
-      });
+        const errorMessage = (error.message = "User already registered");
+        setError(errorMessage);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // Login User
 
   const userLogin = (email, password) => {
+    setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        // Signed in
         setUser(userCredential.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login successfull",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
         // ...
       })
       .catch(error => {
-        setError(error.message);
-      });
+        const errorMessage = (error.message = "Unable to login try again !");
+        setError(errorMessage);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   // userLogOut
 
   const userLogOut = () => {
+    setIsLoading(true);
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
+        Swal.fire("See you again !", "Successfully Logged Out", "success");
       })
       .catch(error => {
         setError(error.message);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  return { user, registerUser, userLogin, error, userLogOut };
+  return { user, error, isLoading, registerUser, userLogin, userLogOut };
 }

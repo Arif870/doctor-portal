@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import { Container, List, ListItem } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import "./Navigation.css";
+import useAuth from "../../../Hooks/useAuth";
 
 export default function Navigation() {
+  const { user, registerUser, error, userLogOut } = useAuth();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -35,33 +37,48 @@ export default function Navigation() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem>
-          <Link to="/">
+        <Link to="/" style={{ textDecoration: "none", color: "#333" }}>
+          <ListItem>
             <i
               className="fas fa-home"
               style={{ marginRight: "10px", color: "var(--primary-color)" }}
             ></i>{" "}
             Home
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/appointment">
+          </ListItem>
+        </Link>
+        <Link
+          to="/appointment"
+          style={{ textDecoration: "none", color: "#333" }}
+        >
+          <ListItem>
             <i
               className="fas fa-calendar-check"
               style={{ marginRight: "10px", color: "var(--primary-color)" }}
             ></i>
             Appointment
+          </ListItem>
+        </Link>
+        {user?.email ? (
+          <Link to="/login" style={{ textDecoration: "none", color: "#333" }}>
+            <ListItem>
+              <i
+                className="fas fa-sign-in-alt"
+                style={{ marginRight: "10px", color: "var(--primary-color)" }}
+              ></i>
+              LogOut
+            </ListItem>
           </Link>
-        </ListItem>
-        <ListItem>
-          <Link to="/login">
-            <i
-              className="fas fa-sign-in-alt"
-              style={{ marginRight: "10px", color: "var(--primary-color)" }}
-            ></i>
-            Login
+        ) : (
+          <Link to="/login" style={{ textDecoration: "none", color: "#333" }}>
+            <ListItem>
+              <i
+                className="fas fa-sign-in-alt"
+                style={{ marginRight: "10px", color: "var(--primary-color)" }}
+              ></i>
+              Login
+            </ListItem>
           </Link>
-        </ListItem>
+        )}
       </List>
     </Box>
   );
@@ -101,11 +118,44 @@ export default function Navigation() {
                   </Link>
                 </Box>
               </Typography>
-              <Link to="/login" style={{ textDecoration: "none" }}>
-                <Button sx={{ color: "#333333", fontWeight: "normal" }}>
-                  Login
-                </Button>
-              </Link>
+              {user?.email ? (
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    onClick={userLogOut}
+                    style={{
+                      backgroundColor: "var(--secondary-color)",
+                      fontWeight: "bold",
+                      display: "block",
+                    }}
+                  >
+                    LogOut{" "}
+                    <i
+                      className="fas fa-sign-in-alt"
+                      style={{ marginLeft: "10px" }}
+                    ></i>
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    style={{
+                      backgroundColor: "var(--secondary-color)",
+                      fontWeight: "bold",
+                      display: "block",
+                    }}
+                  >
+                    Login{" "}
+                    <i
+                      className="fas fa-sign-in-alt"
+                      style={{ marginLeft: "10px" }}
+                    ></i>
+                  </Button>
+                </Link>
+              )}
             </Toolbar>
           </AppBar>
         </Box>

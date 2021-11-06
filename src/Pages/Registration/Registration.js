@@ -3,14 +3,45 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
+import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth.js";
 
 export default function Registration() {
   const [logInData, setLoginData] = useState({});
+  const { user, registerUser, error } = useAuth();
 
   const handleLoginSubmit = e => {
     e.preventDefault();
-  };
 
+    const emailLength = document.getElementById("reg_email").value.length;
+    const passLength = document.getElementById("reg_pass").value.length;
+    const pass2Length = document.getElementById("reg_pass2").value.length;
+
+    if (emailLength === 0 || passLength === 0 || pass2Length === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Field must not be empty",
+      });
+    } else if (logInData.password !== logInData.repeat_password) {
+      Swal.fire({
+        icon: "error",
+        title: "Password did not matched",
+      });
+    } else if (passLength < 6) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "password must be 6 digit long",
+      });
+    } else if (error) {
+      Swal.fire({
+        icon: "error",
+        title: error,
+      });
+    } else {
+      registerUser(logInData.email, logInData.password);
+    }
+  };
   const changeHandalar = e => {
     const value = e.target.value;
     const field = e.target.name;
@@ -19,7 +50,6 @@ export default function Registration() {
     newLoginData[field] = value;
     setLoginData(newLoginData);
   };
-  console.log(logInData);
 
   return (
     <div
@@ -59,7 +89,7 @@ export default function Registration() {
           >
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
-              id="filled-basic"
+              id="reg_email"
               label="Email"
               type="email"
               name="email"
@@ -68,7 +98,7 @@ export default function Registration() {
             />
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
-              id="filled-basic"
+              id="reg_pass"
               label="Password"
               type="password"
               name="password"
@@ -77,10 +107,10 @@ export default function Registration() {
             />
             <TextField
               style={{ width: "100%" }}
-              id="filled-basic"
-              label="Repeat Password"
+              id="reg_pass2"
+              label="Repeat password"
               type="password"
-              name="repeat password"
+              name="repeat_password"
               variant="filled"
               onChange={changeHandalar}
             />

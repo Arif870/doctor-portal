@@ -7,3 +7,19 @@
 * {
   font-family: K2D;
 }
+.swal2-actions .swal2-styled.swal2-confirm {
+  background-color: var(--secondary-color) !important;
+}
+.swal2-icon.swal2-error {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+.swal2-x-mark span.swal2-x-mark-line-left {
+  background-color: var(--primary-color) !important;
+}
+.swal2-x-mark span.swal2-x-mark-line-right {
+  background-color: var(--primary-color) !important;
+}
+h2.swal2-title {
+  color: var(--primary-color);
+}

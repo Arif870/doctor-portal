@@ -5,7 +5,7 @@ import quote from "../../../images/quote.png";
 import people1 from "../../../images/people-1.png";
 import people2 from "../../../images/people-2.png";
 import people3 from "../../../images/people-3.png";
-import Testi from "../Home/Testi/Testi";
+import Testi from "../Testi/Testi";
 
 const testimonial = [
   {
@@ -74,7 +74,7 @@ export default function Testimonial() {
           >
             {testimonial.map((comments, index) => (
               <Grid item xs={4} sm={4} md={4} key={index}>
-                <Testi comments={comments} />
+                <Testi comments={comments}></Testi>
               </Grid>
             ))}
           </Grid>

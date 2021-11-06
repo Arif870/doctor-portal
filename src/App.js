@@ -8,6 +8,7 @@ import Registration from "./Pages/Registration/Registration";
 import Footer from "./Pages/Shared/Footer/Footer";
 
 import Navigation from "./Pages/Shared/Navigation/Navigation";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -22,9 +23,9 @@ function App() {
             <Route path="/home">
               <Home />
             </Route>
-            <Route path="/appointment">
+            <PrivateRoute path="/appointment">
               <Appointment />
-            </Route>
+            </PrivateRoute>
             <Route path="/login">
               <Login />
             </Route>
