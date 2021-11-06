@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
-import FirebaseInit from "../Firebase/FirebaseInit";
 import {
   getAuth,
   onAuthStateChanged,
-  signOut,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
-
-FirebaseInit();
 
 export default function useFirebase() {
   const [user, setUser] = useState({});
+  const [error, setError] = useState("");
   const auth = getAuth();
 
-  // observer
+  // Obserber
 
   useEffect(() => {
-    const unsubscribed = onAuthStateChanged(auth, user => {
+    onAuthStateChanged(auth, user => {
       if (user) {
         setUser(user);
       } else {
         setUser({});
       }
     });
-    return () => unsubscribed;
   }, []);
 
   // Register user
@@ -32,27 +30,40 @@ export default function useFirebase() {
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         // Signed in
-        const user = userCredential.user;
+        setUser(userCredential.user);
         // ...
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        setError(error.message);
         // ..
       });
   };
 
-  // SignOut
+  // Login User
 
-  const logOut = () => {
+  const userLogin = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        // Signed in
+        setUser(userCredential.user);
+        // ...
+      })
+      .catch(error => {
+        setError(error.message);
+      });
+  };
+
+  // userLogOut
+
+  const userLogOut = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
       })
       .catch(error => {
-        // An error happened.
+        setError(error.message);
       });
   };
 
-  return { user, logOut, registerUser };
+  return { user, registerUser, userLogin, error, userLogOut };
 }
