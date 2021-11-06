@@ -5,11 +5,12 @@ import { useHistory, useLocation } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
+import googleimg from "../../images/google_logo.png";
 import Swal from "sweetalert2";
 import "./Login.css";
 
 export default function Login() {
-  const { userLogin, error } = useAuth();
+  const { userLogin, error, googleLogin } = useAuth();
   const [logInData, setLoginData] = useState({});
   const history = useHistory();
   const location = useLocation();
@@ -33,6 +34,10 @@ export default function Login() {
     }
   };
 
+  const googleSignIn = () => {
+    googleLogin(location, history);
+  };
+
   const changeHandalar = e => {
     const value = e.target.value;
     const field = e.target.name;
@@ -46,7 +51,7 @@ export default function Login() {
     <div
       style={{
         backgroundImage: `url(${loginbg})`,
-        backgroundSize: "cover",
+        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         padding: "40px 0px",
       }}
@@ -133,6 +138,23 @@ export default function Login() {
                 className="fas fa-sign-in-alt"
                 style={{ marginLeft: "10px" }}
               ></i>
+            </Button>
+            <Typography
+              style={{
+                display: "block",
+                textAlign: "center",
+                margin: "20px 0px",
+                color: "var(--body-text-color)",
+              }}
+              variant="p"
+            >
+              Or login by
+            </Typography>
+            <Button
+              onClick={googleSignIn}
+              style={{ margin: "auto", display: "block", borderRadius: "20px" }}
+            >
+              <img style={{ width: "40px" }} src={googleimg} alt="googleicon" />
             </Button>
           </form>
         </Grid>

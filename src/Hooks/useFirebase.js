@@ -5,6 +5,8 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import FirebaseInit from "../Firebase/FirebaseInit";
@@ -17,6 +19,7 @@ export default function useFirebase() {
   const [isLoading, setIsLoading] = useState(true);
 
   const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
 
   // Obserber
 
@@ -81,6 +84,23 @@ export default function useFirebase() {
       .finally(() => setIsLoading(false));
   };
 
+  // Google login
+
+  const googleLogin = (location, history) => {
+    setIsLoading(true);
+    signInWithPopup(auth, googleProvider)
+      .then(result => {
+        setUser(result.user);
+        const destination = location?.state?.from;
+        history.push(destination);
+        setError("");
+      })
+      .catch(error => {
+        setError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   // userLogOut
 
   const userLogOut = () => {
@@ -95,5 +115,13 @@ export default function useFirebase() {
       .finally(() => setIsLoading(false));
   };
 
-  return { user, error, isLoading, registerUser, userLogin, userLogOut };
+  return {
+    user,
+    error,
+    isLoading,
+    registerUser,
+    userLogin,
+    googleLogin,
+    userLogOut,
+  };
 }
