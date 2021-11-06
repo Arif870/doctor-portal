@@ -1,6 +1,7 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
 import Swal from "sweetalert2";
@@ -9,6 +10,10 @@ import useAuth from "../../Hooks/useAuth.js";
 export default function Registration() {
   const [logInData, setLoginData] = useState({});
   const { user, registerUser, error } = useAuth();
+
+  // redirect to login page
+  const location = useLocation();
+  const history = useHistory();
 
   const handleLoginSubmit = e => {
     e.preventDefault();
@@ -39,7 +44,7 @@ export default function Registration() {
         title: error,
       });
     } else {
-      registerUser(logInData.email, logInData.password);
+      registerUser(logInData.email, logInData.password, location, history);
     }
   };
   const changeHandalar = e => {

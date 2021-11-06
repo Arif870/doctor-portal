@@ -33,7 +33,7 @@ export default function useFirebase() {
 
   // Register user
 
-  const registerUser = (email, password) => {
+  const registerUser = (email, password, location, history) => {
     setIsLoading(false);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
@@ -47,6 +47,8 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
+        const redirectLogin = "/login";
+        history.push(redirectLogin);
       })
       .catch(error => {
         const errorMessage = (error.message = "User already registered");

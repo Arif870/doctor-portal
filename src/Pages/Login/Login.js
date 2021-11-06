@@ -11,7 +11,6 @@ import "./Login.css";
 export default function Login() {
   const { userLogin, error } = useAuth();
   const [logInData, setLoginData] = useState({});
-  const location = useLocation();
   const history = useHistory();
 
   const handleLoginSubmit = e => {
@@ -29,7 +28,7 @@ export default function Login() {
         title: error,
       });
     } else {
-      userLogin(logInData.email, logInData.password, location, history);
+      userLogin(logInData.email, logInData.password, history);
     }
   };
 
