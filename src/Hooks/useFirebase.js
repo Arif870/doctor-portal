@@ -57,11 +57,10 @@ export default function useFirebase() {
 
   // Login User
 
-  const userLogin = (email, password) => {
+  const userLogin = (email, password, location, history) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        setUser(userCredential.user);
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -69,8 +68,9 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
-
-        // ...
+        setUser(userCredential.user);
+        const destination = location?.state?.from || "/";
+        history.replace(destination);
       })
       .catch(error => {
         const errorMessage = (error.message = "Unable to login try again !");

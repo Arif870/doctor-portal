@@ -1,6 +1,7 @@
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 import loginbg from "../../images/loginbg.png";
 import loginimg from "../../images/loginimg.png";
@@ -10,6 +11,8 @@ import "./Login.css";
 export default function Login() {
   const { userLogin, error } = useAuth();
   const [logInData, setLoginData] = useState({});
+  const location = useLocation();
+  const history = useHistory();
 
   const handleLoginSubmit = e => {
     e.preventDefault();
@@ -26,7 +29,7 @@ export default function Login() {
         title: error,
       });
     } else {
-      userLogin(logInData.email, logInData.password);
+      userLogin(logInData.email, logInData.password, location, history);
     }
   };
 
