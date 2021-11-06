@@ -13,7 +13,7 @@ import "./Navigation.css";
 import useAuth from "../../../Hooks/useAuth";
 
 export default function Navigation() {
-  const { user, registerUser, error, userLogOut } = useAuth();
+  const { user, userLogOut } = useAuth();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -37,11 +37,52 @@ export default function Navigation() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        {user?.displayName && (
+          <img
+            style={{
+              width: "60px",
+              height: "60px",
+              borderRadius: "50%",
+              margin: "auto",
+              display: "block",
+              border: "2px solid var(--primary-color)",
+              marginTop: "20px",
+            }}
+            src={user.photoURL}
+            alt=""
+          />
+        )}
+        {user?.email && (
+          <Typography
+            style={{
+              color: "var(--body-text-color)",
+              fontWeight: "lightt",
+              textAlign: "center",
+              marginTop: "5px",
+              fontSize: "12px",
+            }}
+          >
+            {user.email}
+          </Typography>
+        )}
+        {user?.displayName && (
+          <Typography
+            variant="h6"
+            style={{
+              color: "var(--primary-color)",
+              fontWeight: "bold",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
+          >
+            {user.displayName}
+          </Typography>
+        )}
         <Link to="/" style={{ textDecoration: "none", color: "#333" }}>
           <ListItem>
             <i
               className="fas fa-home"
-              style={{ marginRight: "10px", color: "var(--primary-color)" }}
+              style={{ marginRight: "20px", color: "var(--primary-color)" }}
             ></i>{" "}
             Home
           </ListItem>
@@ -53,17 +94,18 @@ export default function Navigation() {
           <ListItem>
             <i
               className="fas fa-calendar-check"
-              style={{ marginRight: "10px", color: "var(--primary-color)" }}
+              style={{ marginRight: "20px", color: "var(--primary-color)" }}
             ></i>
             Appointment
           </ListItem>
         </Link>
+
         {user?.email ? (
           <Link to="/login" style={{ textDecoration: "none", color: "#333" }}>
-            <ListItem>
+            <ListItem onClick={userLogOut}>
               <i
                 className="fas fa-sign-in-alt"
-                style={{ marginRight: "10px", color: "var(--primary-color)" }}
+                style={{ marginRight: "20px", color: "var(--primary-color)" }}
               ></i>
               LogOut
             </ListItem>
@@ -118,6 +160,7 @@ export default function Navigation() {
                   </Link>
                 </Box>
               </Typography>
+
               {user?.email ? (
                 <Link to="/login" style={{ textDecoration: "none" }}>
                   <Button

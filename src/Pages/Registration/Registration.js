@@ -9,7 +9,7 @@ import useAuth from "../../Hooks/useAuth.js";
 
 export default function Registration() {
   const [logInData, setLoginData] = useState({});
-  const { user, registerUser, error } = useAuth();
+  const { registerUser, error } = useAuth();
 
   // redirect to login page
   const location = useLocation();
@@ -18,11 +18,17 @@ export default function Registration() {
   const handleLoginSubmit = e => {
     e.preventDefault();
 
+    const nameLength = document.getElementById("reg_name").value.length;
     const emailLength = document.getElementById("reg_email").value.length;
     const passLength = document.getElementById("reg_pass").value.length;
     const pass2Length = document.getElementById("reg_pass2").value.length;
 
-    if (emailLength === 0 || passLength === 0 || pass2Length === 0) {
+    if (
+      emailLength === 0 ||
+      passLength === 0 ||
+      pass2Length === 0 ||
+      nameLength === 0
+    ) {
       Swal.fire({
         icon: "error",
         title: "Field must not be empty",
@@ -44,7 +50,13 @@ export default function Registration() {
         title: error,
       });
     } else {
-      registerUser(logInData.email, logInData.password, location, history);
+      registerUser(
+        logInData.email,
+        logInData.password,
+        logInData.name,
+        location,
+        history
+      );
     }
   };
   const changeHandalar = e => {
@@ -92,6 +104,15 @@ export default function Registration() {
             className="loginformsizecontrol"
             style={{ width: "500px" }}
           >
+            <TextField
+              style={{ width: "100%", marginBottom: "20px" }}
+              id="reg_name"
+              label="Name"
+              type="text"
+              name="name"
+              variant="filled"
+              onChange={changeHandalar}
+            />
             <TextField
               style={{ width: "100%", marginBottom: "20px" }}
               id="reg_email"

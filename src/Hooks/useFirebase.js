@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
   signOut,
 } from "firebase/auth";
 import FirebaseInit from "../Firebase/FirebaseInit";
@@ -36,13 +37,14 @@ export default function useFirebase() {
 
   // Register user
 
-  const registerUser = (email, password, location, history) => {
+  const registerUser = (email, password, name, location, history) => {
     setIsLoading(false);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
         setUser(user);
+
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -50,6 +52,19 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
+        const newUser = { email, displayName: name };
+        setUser(newUser);
+
+        // date send to firebase
+
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+          .then(() => {})
+          .catch(error => {
+            setError(error.message);
+          });
+
         const destination = "/login";
         history.replace(destination);
       })
@@ -73,6 +88,7 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
+
         setUser(userCredential.user);
         const destination = location?.state?.from || "/";
         history.replace(destination);
@@ -91,8 +107,8 @@ export default function useFirebase() {
     signInWithPopup(auth, googleProvider)
       .then(result => {
         setUser(result.user);
-        const destination = location?.state?.from;
-        history.push(destination);
+        const destination = location?.state?.from || "/";
+        history.replace(destination);
         setError("");
       })
       .catch(error => {
