@@ -12,6 +12,7 @@ export default function Login() {
   const { userLogin, error } = useAuth();
   const [logInData, setLoginData] = useState({});
   const history = useHistory();
+  const location = useLocation();
 
   const handleLoginSubmit = e => {
     e.preventDefault();
@@ -28,7 +29,7 @@ export default function Login() {
         title: error,
       });
     } else {
-      userLogin(logInData.email, logInData.password, history);
+      userLogin(logInData.email, logInData.password, location, history);
     }
   };
 

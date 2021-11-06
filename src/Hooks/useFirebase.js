@@ -47,8 +47,8 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
-        const redirectLogin = "/login";
-        history.push(redirectLogin);
+        const destination = "/login";
+        history.replace(destination);
       })
       .catch(error => {
         const errorMessage = (error.message = "User already registered");
