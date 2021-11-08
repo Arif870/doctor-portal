@@ -44,6 +44,9 @@ export default function useFirebase() {
         // Signed in
         const user = userCredential.user;
         setUser(user);
+        const newUser = { email, displayName: name };
+
+        savetoDB(email, name, password);
 
         Swal.fire({
           position: "top-end",
@@ -52,9 +55,7 @@ export default function useFirebase() {
           showConfirmButton: false,
           timer: 2000,
         });
-        const newUser = { email, displayName: name };
         setUser(newUser);
-
         // date send to firebase
 
         updateProfile(auth.currentUser, {
@@ -73,6 +74,19 @@ export default function useFirebase() {
         setError(errorMessage);
       })
       .finally(() => setIsLoading(false));
+  };
+
+  // user save to database
+
+  const savetoDB = (email, displayName, password) => {
+    const users = { email, displayName, password };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    });
   };
 
   // Login User
