@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -6,6 +6,8 @@ import Fade from "@mui/material/Fade";
 import TextField from "@mui/material/TextField";
 import { Button, Container, Typography } from "@mui/material";
 import "./BookingModel.css";
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const style = {
   position: "absolute",
@@ -19,18 +21,49 @@ const style = {
   p: 4,
 };
 
-const handleSend = () => {
-  // Send data to database
-};
-
-export default function BookingModal({
-  open,
-  handleOpen,
-  handleClose,
-  booking,
-  date,
-}) {
+export default function BookingModal({ open, handleClose, booking, date }) {
   const { name, time } = booking;
+  const { user } = useAuth();
+  const initialInfo = {
+    patientName: user.displayName,
+    email: user.email,
+    phone: "",
+  };
+  const [bookingInfo, setBookingInfo] = useState(initialInfo);
+
+  const handleOnBlur = e => {
+    const field = e.target.name;
+    const value = e.target.value;
+    const newInfo = { ...bookingInfo };
+    newInfo[field] = value;
+    setBookingInfo(newInfo);
+  };
+
+  const handleBookingSubmit = e => {
+    e.preventDefault();
+    const appointment = {
+      ...bookingInfo,
+      serviceName: name,
+      time,
+      date: date.toLocaleDateString(),
+    };
+    setBookingInfo(appointment);
+    fetch("http://localhost:5000/appointments", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(appointment),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.insertedId) {
+          Swal.fire("Thank you", "You appointment is successfull", "success");
+          handleClose();
+        }
+      });
+  };
+
   return (
     <div>
       <Container>
@@ -47,7 +80,7 @@ export default function BookingModal({
         >
           <Fade in={open}>
             <Box sx={style}>
-              <form>
+              <form onSubmit={handleBookingSubmit}>
                 <Typography
                   style={{
                     fontWeight: "bold",
@@ -76,7 +109,13 @@ export default function BookingModal({
                     "& > :not(style)": { m: 1 },
                   }}
                 >
-                  <TextField style={{ width: "100%" }} label="Name" />
+                  <TextField
+                    name="patientName"
+                    style={{ width: "100%" }}
+                    label="Name"
+                    onBlur={handleOnBlur}
+                    defaultValue={user.displayName}
+                  />
                 </Box>
                 <Box
                   sx={{
@@ -85,7 +124,13 @@ export default function BookingModal({
                     "& > :not(style)": { m: 1 },
                   }}
                 >
-                  <TextField style={{ width: "100%" }} label="Phone Number" />
+                  <TextField
+                    name="phone"
+                    style={{ width: "100%" }}
+                    label="Phone Number"
+                    onBlur={handleOnBlur}
+                    defaultValue=""
+                  />
                 </Box>
                 <Box
                   sx={{
@@ -94,7 +139,13 @@ export default function BookingModal({
                     "& > :not(style)": { m: 1 },
                   }}
                 >
-                  <TextField style={{ width: "100%" }} label="Email" />
+                  <TextField
+                    name="email"
+                    style={{ width: "100%" }}
+                    label="Email"
+                    onBlur={handleOnBlur}
+                    defaultValue={user.email}
+                  />
                 </Box>
                 <Box
                   sx={{
@@ -111,7 +162,7 @@ export default function BookingModal({
                 </Box>
 
                 <Button
-                  onClick={handleClose}
+                  onClick={handleBookingSubmit}
                   variant="contained"
                   style={{
                     backgroundColor: "var(--secondary-color)",

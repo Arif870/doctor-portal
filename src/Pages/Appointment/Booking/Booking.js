@@ -17,6 +17,7 @@ export default function Booking({ booking, date }) {
         <Box
           sx={{
             minWidth: 275,
+            minHeight: 255,
             boxShadow: "0px 4px 9px #4e4e4e29",
             borderRadius: "10px",
           }}
@@ -28,7 +29,11 @@ export default function Booking({ booking, date }) {
             <React.Fragment>
               <CardContent>
                 <Typography
-                  style={{ color: "var(--primary-color)", fontWeight: "bold" }}
+                  style={{
+                    color: "var(--primary-color)",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                  }}
                   variant="h6"
                 >
                   {name}
@@ -36,7 +41,7 @@ export default function Booking({ booking, date }) {
 
                 <Typography
                   style={{
-                    margin: "10px 0px",
+                    margin: "20px 0px 10px",
                     display: "block",
                   }}
                   variant="p"
@@ -57,6 +62,7 @@ export default function Booking({ booking, date }) {
                 style={{
                   backgroundColor: "var(--secondary-color)",
                   fontWeight: "bold",
+                  marginTop: "20px",
                 }}
               >
                 Book Now{" "}

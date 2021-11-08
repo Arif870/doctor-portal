@@ -87,6 +87,20 @@ export default function Navigation() {
             Home
           </ListItem>
         </Link>
+        {user.email && (
+          <Link
+            to="/dashboard"
+            style={{ textDecoration: "none", color: "#333" }}
+          >
+            <ListItem>
+              <i
+                className="fas fa-tachometer-alt"
+                style={{ marginRight: "20px", color: "var(--primary-color)" }}
+              ></i>{" "}
+              Dashboard
+            </ListItem>
+          </Link>
+        )}
         <Link
           to="/appointment"
           style={{ textDecoration: "none", color: "#333" }}

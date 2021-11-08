@@ -33,12 +33,12 @@ export default function useFirebase() {
       }
       setIsLoading(false);
     });
-  }, []);
+  }, [auth]);
 
   // Register user
 
   const registerUser = (email, password, name, location, history) => {
-    setIsLoading(false);
+    setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         // Signed in
