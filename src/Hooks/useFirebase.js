@@ -135,6 +135,7 @@ export default function useFirebase() {
     user,
     error,
     isLoading,
+    setIsLoading,
     registerUser,
     userLogin,
     googleLogin,

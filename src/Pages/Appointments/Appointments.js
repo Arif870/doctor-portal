@@ -1,19 +1,21 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { LoadingButton } from "@mui/lab";
+import { Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import YourAppointments from "./YourAppointments/YourAppointments";
 
-export default function Appointments() {
+export default function Appointments({ date }) {
   const [yourAppointment, setYourAppointment] = useState([]);
   const { user } = useAuth();
+  let appointmantDate = date.toLocaleDateString();
 
   useEffect(() => {
-    const uri = `http://localhost:5000/appointments`;
+    const uri = `http://localhost:5000/appointments?email=${user.email}&date=${appointmantDate}`;
     fetch(uri)
       .then(res => res.json())
       .then(data => setYourAppointment(data));
-  }, []);
+  }, [user.email, appointmantDate]);
+
   return (
     <div>
       <Typography
@@ -29,14 +31,21 @@ export default function Appointments() {
         {" "}
         Hey, {user.displayName} here is your all Appointments
       </Typography>
-      <Grid container spacing={3} sx={{ marginTop: "20px" }}>
-        {yourAppointment.map(yourAppointment => (
-          <YourAppointments
-            key={yourAppointment._id}
-            yourAppointment={yourAppointment}
-          ></YourAppointments>
-        ))}
-      </Grid>
+
+      {yourAppointment.length === 0 ? (
+        <Typography variant="h5" style={{ marginTop: "30px" }}>
+          No appointment on {appointmantDate}{" "}
+        </Typography>
+      ) : (
+        <Grid container spacing={3} sx={{ marginTop: "20px" }}>
+          {yourAppointment.map(yourAppointment => (
+            <YourAppointments
+              key={yourAppointment._id}
+              yourAppointment={yourAppointment}
+            ></YourAppointments>
+          ))}
+        </Grid>
+      )}
     </div>
   );
 }
