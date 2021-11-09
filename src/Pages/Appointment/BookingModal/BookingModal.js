@@ -48,7 +48,7 @@ export default function BookingModal({ open, handleClose, booking, date }) {
       date: date.toLocaleDateString(),
     };
     setBookingInfo(appointment);
-    fetch("http://localhost:5000/appointments", {
+    fetch("https://rocky-sierra-48199.herokuapp.com/appointments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -9,7 +9,7 @@ export default function Appointments({ date }) {
   let appointmantDate = date.toLocaleDateString();
 
   useEffect(() => {
-    const uri = `http://localhost:5000/appointments?email=${user.email}&date=${appointmantDate}`;
+    const uri = `https://rocky-sierra-48199.herokuapp.com/appointments?email=${user.email}&date=${appointmantDate}`;
     fetch(uri)
       .then(res => res.json())
       .then(data => setYourAppointment(data));

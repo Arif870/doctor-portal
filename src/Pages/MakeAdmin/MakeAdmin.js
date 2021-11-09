@@ -13,7 +13,7 @@ export default function MakeAdmin() {
     let name = document.getElementById("makeAdmin").value;
     setAdmin(name);
     const user = { admin };
-    fetch("http://localhost:5000/users/admin", {
+    fetch("https://rocky-sierra-48199.herokuapp.com/users/admin", {
       method: "PUT",
       headers: {
         authorization: `Bearer ${token}`,

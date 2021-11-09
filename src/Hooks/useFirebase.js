@@ -86,7 +86,7 @@ export default function useFirebase() {
 
   const savetoDB = (email, displayName, password, method) => {
     const users = { email, displayName, password };
-    fetch("http://localhost:5000/users", {
+    fetch("https://rocky-sierra-48199.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
@@ -96,7 +96,7 @@ export default function useFirebase() {
   };
   const googlesavetoDB = (email, displayName, method) => {
     const users = { email, displayName };
-    fetch("http://localhost:5000/users", {
+    fetch("https://rocky-sierra-48199.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
@@ -173,7 +173,7 @@ export default function useFirebase() {
   // Admin checking
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://rocky-sierra-48199.herokuapp.com/users/${user.email}`)
       .then(res => res.json())
       .then(data => setAdmin(data.admin));
   }, [user.email]);
