@@ -1,9 +1,7 @@
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
-import useAuth from "../../../Hooks/useAuth";
 
 export default function YourAppointments({ yourAppointment }) {
-  const { user } = useAuth();
   return (
     <Grid item xs={12} sm={6}>
       <Card
