@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
+  getIdToken,
   signOut,
 } from "firebase/auth";
 import FirebaseInit from "../Firebase/FirebaseInit";
@@ -18,6 +19,8 @@ export default function useFirebase() {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [admin, setAdmin] = useState(false);
+  const [token, setToken] = useState("");
 
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
@@ -28,6 +31,9 @@ export default function useFirebase() {
     onAuthStateChanged(auth, user => {
       if (user) {
         setUser(user);
+        getIdToken(user).then(idToken => {
+          setToken(idToken);
+        });
       } else {
         setUser({});
       }
@@ -46,7 +52,7 @@ export default function useFirebase() {
         setUser(user);
         const newUser = { email, displayName: name };
 
-        savetoDB(email, name, password);
+        savetoDB(email, name, password, "POST");
 
         Swal.fire({
           position: "top-end",
@@ -78,10 +84,20 @@ export default function useFirebase() {
 
   // user save to database
 
-  const savetoDB = (email, displayName, password) => {
+  const savetoDB = (email, displayName, password, method) => {
     const users = { email, displayName, password };
     fetch("http://localhost:5000/users", {
-      method: "POST",
+      method: method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    });
+  };
+  const googlesavetoDB = (email, displayName, method) => {
+    const users = { email, displayName };
+    fetch("http://localhost:5000/users", {
+      method: method,
       headers: {
         "content-type": "application/json",
       },
@@ -121,6 +137,15 @@ export default function useFirebase() {
     signInWithPopup(auth, googleProvider)
       .then(result => {
         setUser(result.user);
+        googlesavetoDB(result.user.email, result.user.displayName, "PUT");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login successfull",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
         const destination = location?.state?.from || "/";
         history.replace(destination);
         setError("");
@@ -145,10 +170,20 @@ export default function useFirebase() {
       .finally(() => setIsLoading(false));
   };
 
+  // Admin checking
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/users/${user.email}`)
+      .then(res => res.json())
+      .then(data => setAdmin(data.admin));
+  }, [user.email]);
+
   return {
     user,
     error,
     isLoading,
+    admin,
+    token,
     setIsLoading,
     registerUser,
     userLogin,

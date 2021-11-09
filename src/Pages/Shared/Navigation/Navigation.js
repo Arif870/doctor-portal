@@ -13,7 +13,7 @@ import "./Navigation.css";
 import useAuth from "../../../Hooks/useAuth";
 
 export default function Navigation() {
-  const { user, userLogOut } = useAuth();
+  const { user, userLogOut, admin } = useAuth();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -88,18 +88,54 @@ export default function Navigation() {
           </ListItem>
         </Link>
         {user.email && (
-          <Link
-            to="/dashboard"
-            style={{ textDecoration: "none", color: "#333" }}
-          >
-            <ListItem>
-              <i
-                className="fas fa-tachometer-alt"
-                style={{ marginRight: "20px", color: "var(--primary-color)" }}
-              ></i>{" "}
-              Dashboard
-            </ListItem>
-          </Link>
+          <Box>
+            <Link
+              to="/dashboard"
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              <ListItem>
+                <i
+                  className="fas fa-tachometer-alt"
+                  style={{ marginRight: "20px", color: "var(--primary-color)" }}
+                ></i>{" "}
+                Dashboard
+              </ListItem>
+            </Link>
+            {admin && (
+              <Box style={{ marginLeft: "30px" }}>
+                <Link
+                  to="/addDoctor"
+                  style={{ textDecoration: "none", color: "#333" }}
+                >
+                  <ListItem>
+                    <i
+                      className="fas fa-user-md"
+                      style={{
+                        marginRight: "20px",
+                        color: "var(--primary-color)",
+                      }}
+                    ></i>{" "}
+                    Add a doctor
+                  </ListItem>
+                </Link>
+                <Link
+                  to="/makeAdmin"
+                  style={{ textDecoration: "none", color: "#333" }}
+                >
+                  <ListItem>
+                    <i
+                      className="fas fa-user-tie"
+                      style={{
+                        marginRight: "20px",
+                        color: "var(--primary-color)",
+                      }}
+                    ></i>{" "}
+                    Make Admin
+                  </ListItem>
+                </Link>
+              </Box>
+            )}
+          </Box>
         )}
         <Link
           to="/appointment"
